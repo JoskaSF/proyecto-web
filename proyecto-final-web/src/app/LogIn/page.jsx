@@ -6,8 +6,7 @@ function LoginPage() {
       className="min-h-screen bg-cover bg-center flex justify-center items-center"
       style={{ backgroundImage: "url('/images/background.png')" }}
     >
-      <div className="bg-gray-200 bg-opacity-80 p-8 rounded-lg shadow-lg max-w-sm w-full">
-        {/* Título */}
+      <div className="bg-gray-200 bg-opacity-100 p-8 rounded-lg shadow-lg max-w-sm w-full">
         <h2 className="text-3xl font-bold text-center text-green-500 mb-6">Inicio de sesión</h2>
         
         <form>
@@ -34,7 +33,7 @@ function LoginPage() {
           </div>
 
           <button
-            type="post"
+            type="submit" formMethod='POST'
             className="w-full py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
           >Ingresar</button>
         </form>
