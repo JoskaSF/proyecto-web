@@ -36,7 +36,6 @@ const SideBar = () => {
                     </div>
                 </Link>
                 <Link href={'/Home'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaHome/>Home</Link>
-                <Link href={'/Home/History'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaHistory/>History</Link>
                 <Link href={'/Home/Account'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaUser/>Account</Link>
             </div>
             <button onClick={handleLogOut} className='flex items-center gap-1 mb-10 text-[1.3rem] border-b-2 border-transparent hover:border-[#276e2c]'><IoExit/>Cerrar Sesión</button>
