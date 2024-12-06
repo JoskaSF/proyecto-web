@@ -11,7 +11,7 @@ const MainPage = () => {
           <img src="/images/Logo.png" alt="Recetas"  className='rounded-full max-h-[65%]'/>
           <p className='text-white ml-[10%] font-serif text-[120%]'>Recetitas</p>
         </div>
-        <Link href={'/LogIn'} className='mr-[5%] border-b-2 border-r-2 border-green-900 bg-[#38ab40] hover:bg-[#93da98] p-2 rounded-xl'>Iniciar Sesion</Link>
+        <Link href={'/Home'} className='mr-[5%] border-b-2 border-r-2 border-green-900 bg-[#38ab40] hover:bg-[#93da98] p-2 rounded-xl'>Iniciar Sesion</Link>
       </div>
       <div className='min-w-[100vw] min-h-[88vh] overflow-clip relative flex items-center justify-center'>
         <img src="/images/bgMain.png" alt="Meal Background" className='absolute top-0 left-0 z-0 opacity-40 animacion_main_background object-fill'/>
