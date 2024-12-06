@@ -7,11 +7,11 @@ const RecipeCard = ({name, ingredients, image, instructions}) => {
         setShowInstructions(!showInstructions); // Alterna el estado de visibilidad
     };
 return (
-    <div className='w-auto h-auto rounded-xl display fljustify-center items-center bg-slate-500 p-5 m-10'>
+    <div className='w-auto h-auto rounded-xl display fljustify-center items-center bg-[#A1D8A4] p-5 m-10'>
         {/* Nombre de la receta */}
-        <div className='w-auto flex text-center text-white justify-center text-2xl' >{name}</div>
-        <div className='text-white font-semibold my-1'>Ingredientes:</div>
-        <div className="bg-white rounded-sm flex flex-wrap text-justify">
+        <div className='w-auto flex text-center text-black font-semibold justify-center text-2xl' >{name}</div>
+        <div className='text-black font-semibold my-1'>Ingredientes:</div>
+        <div className="p-2 bg-[#b7ecb9] flex flex-wrap text-justify rounded-2xl my-5">
             <p>{ingredients.join(', ')}</p>
         </div>  
         <div className='flex justify-items-center'>
@@ -19,14 +19,14 @@ return (
         </div>  
         {showInstructions && (
             <>
-            <div className='text-white font-semibold my-1' >Instrucciones:</div>
-            <p style={{whiteSpace: 'pre-line'}} className='bg-white rounded-sm text-justify' >
+            <div className='text-black font-semibold my-6' >Instrucciones:</div>
+            <p style={{whiteSpace: 'pre-line'}} className='bg-[#b7ecb9] p-2 rounded-2xl text-justify' >
                 {instructions}</p>
-            <button className='m-2 w-20 h-10 bg-orange-500'>Hecha</button>
+            <button className='m-2 w-32 h-10 rounded-2xl bg-[#41B149]'>Hecha</button>
             </>
         )}        
         
-        <button onClick={toggleInstructions} className='m-2 w-20 h-10 bg-orange-500'>
+        <button onClick={toggleInstructions} className='mt-5 w-32 h-10 bg-[#beff0a] rounded-2xl'>
             {showInstructions ? 'Ocultar' : 'Ver más'}
         </button>
 
