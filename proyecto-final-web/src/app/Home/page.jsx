@@ -1,10 +1,14 @@
 'use client'
-import React, {useEffect, useState} from 'react'
-import RecipeCard from '@/components/RecipeCard'
-import SideBar from '@/components/SideBar'
+import React, {useState} from 'react'
+import ComidasPage from '@/components/Comidas';
+import LoginPage from '../LogIn/page';
+import appFirebase from '@/firebase/firebaseConfig';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+const auth = getAuth(appFirebase);
 
 
 const HomePage = () => {
+<<<<<<< HEAD
   const [meals, setMeals] =  useState([]); //Aqui se almacenan las meals, en un array
   const [loading, setLoading] =  useState(true); 
   const [categoria, setCategoria] = useState("");
@@ -58,6 +62,21 @@ const HomePage = () => {
           ))
         )}
       </main>
+=======
+  const [usuario, setUsuario] = useState(null);
+
+  onAuthStateChanged(auth, (usuarioFirebase) => {
+    if (usuarioFirebase) {
+      setUsuario(usuarioFirebase);
+    } else {
+      setUsuario(null);
+    }
+  });
+
+  return (
+    <div>
+      {usuario ? <ComidasPage correoUsuario = {usuario.email}/> : <LoginPage/>}
+>>>>>>> 45fe214 (Ya jalo esta vaina)
     </div>
 
   );

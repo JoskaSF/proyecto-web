@@ -1,7 +1,9 @@
-import React from 'react'
-import Link from 'next/link'
+'use client'
+import React, { useState } from 'react';
+import Link from 'next/link';
 
 const MainPage = () => {
+  
   return (
     <div className='max-w-[100vw] max-h-[100vh]'>
       <div className='sticky top-0 h-[12vh] w-screen bg-[#41B149] shadow-xl z-50 flex items-center justify-between'>
