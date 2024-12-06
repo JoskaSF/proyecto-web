@@ -34,22 +34,21 @@ const SignIn = () => {
         catch (e) {
             let mensajeError = 'No se pudo crear';
             switch (e.code) {
-              case 'auth/invalid-email':
-                mensajeError = 'Correo electrónico inválido';
-                break;
-              case 'auth/user-not-found':
-                mensajeError = 'El usuario no existe';
-                break;
-              case 'auth/wrong-password':
-                mensajeError = 'Contraseña incorrecta';
-                break;
-              default:
-                mensajeError = e.message; // Mostrar mensaje de error genérico
+                case 'auth/invalid-email':
+                    mensajeError = 'Correo electrónico inválido';
+                    break;
+                case 'auth/user-not-found':
+                    mensajeError = 'El usuario no existe';
+                    break;
+                case 'auth/wrong-password':
+                    mensajeError = 'Contraseña incorrecta';
+                    break;
+                default:
+                    mensajeError = e.message; // Mostrar mensaje de error genérico
             }
             setError(mensajeError);
             setRegistrando(false);
-      
-          }
+        }
     }
 
     return (

@@ -88,7 +88,10 @@ const LoginPage = () => {
               placeholder="Ingresa tu contraseña"
               onChange={(e) => setContraseña(e.target.value)}
             />
-            <Link href={'/SignIn'} className='flex justify-end text-gray-500 hover:text-gray-600'>Registrarse</Link>
+            <div className='flex flex-row justify-between'>
+              <Link href={'/'} className='flex justify-end text-gray-500 hover:text-gray-600'>Salir</Link>
+              <Link href={'/SignIn'} className='flex justify-end text-gray-500 hover:text-gray-600'>Registrarse</Link>
+            </div>
           </div>
           
 
