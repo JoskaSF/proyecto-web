@@ -3,27 +3,11 @@ import Link from 'next/link';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/firebase/firebaseConfig';
 import { useRouter } from 'next/navigation';
+import { FaHome, FaHistory,FaUser } from "react-icons/fa";
+import { IoExit } from "react-icons/io5";
 
-const SideBar = ({setCategoria}) => {
-    const [options, setOptions] = useState([]);
+const SideBar = () => {
     const router = useRouter();
-
-    useEffect(() => {
-        const fetchOptions = async () => {
-            try {
-                const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
-                const data = await response.json();
-                setOptions(data.categories || []); // Maneja posibles resultados nulos
-            } catch (error) {
-                console.error('Error al cargar las opciones:', error);
-            }
-        };
-        fetchOptions();
-    }, []);
-
-    const handleChange = (event) => {
-        setCategoria(event.target.value);
-    };
 
     const handleLogOut = async () => {
         try {
@@ -36,22 +20,19 @@ const SideBar = ({setCategoria}) => {
     };
 
     return (
-        <aside className="bg-red-300 h-screen w-[20vw] flex flex-col p-[3%]">
-            <Link href={'/Home'}>Home</Link>
-            <Link href={'/Home/History'}>History</Link>
-            <Link href={'/Home/Account'}>Account</Link>
-            <label>Categorias:</label>
-            <select onChange={handleChange} defaultValue="">
-                <option value="" disabled>
-                    Selecciona una categoria
-                </option>
-                {options.map((option) => (
-                    <option key={option.idCategory} value={option.strCategory}>
-                        {option.strCategory}
-                    </option>
-                ))}
-            </select>
-            <button onClick={handleLogOut}>Cerrar Sesión</button>
+        <aside className="bg-[#41B149] h-screen w-[20vw] flex flex-col justify-between p-[3%]">
+            <div className='space-y-3 text-[1.3rem]'>
+                <Link href={'/'}>
+                    <div className='flex flex-row w-full items-center mb-8'>
+                        <img src="/images/Logo.png" alt="Recetas" className='rounded-full max-w-[30%]'/>
+                        <p className='text-white ml-[5%] font-serif text-[120%]'>Recetitas</p>
+                    </div>
+                </Link>
+                <Link href={'/Home'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaHome/>Home</Link>
+                <Link href={'/Home/History'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaHistory/>History</Link>
+                <Link href={'/Home/Account'} className='flex items-center gap-1 border-b-2 border-transparent hover:border-[#276e2c]'><FaUser/>Account</Link>
+            </div>
+            <button onClick={handleLogOut} className='flex items-center gap-1 mb-10 text-[1.3rem] border-b-2 border-transparent hover:border-[#276e2c]'><IoExit/>Cerrar Sesión</button>
         </aside>
     );
 };

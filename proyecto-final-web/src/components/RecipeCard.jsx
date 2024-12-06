@@ -5,8 +5,8 @@ const RecipeCard = ({name, ingredients, image, instructions}) => {
 
     const toggleInstructions = () => {
         setShowInstructions(!showInstructions); // Alterna el estado de visibilidad
-      };
-  return (
+    };
+return (
     <div className='w-auto h-auto rounded-xl display fljustify-center items-center bg-slate-500 p-5 m-10'>
         {/* Nombre de la receta */}
         <div className='w-auto flex text-center text-white justify-center text-2xl' >{name}</div>
