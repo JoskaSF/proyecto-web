@@ -2,28 +2,32 @@
 import React from 'react';
 import Link from 'next/link'
 import { useState } from 'react';
-import { auth } from '@/firebase/firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import appFirebase from '@/firebase/firebaseConfig';
+import { useRouter } from 'next/navigation';
+const auth = getAuth(appFirebase);
 
 const LoginPage = () => {
 
+  const [registrando, setRegistrando] = useState(false);
   const [correo, setCorreo] = useState('');
-  const [password, setPassword] = useState('');
+  const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
+  const route = useRouter();
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     
-    // Validar que los campos no se envien vacios
-    if (!correo || !password) {
-      setError("Ingresar todos los campos!");
+    if (!correo || !contraseña) {
+      setError('Por favor ingresa ambos campos');
       return;
     }
 
-    try {
-      const credencialUsuario = await signInWithEmailAndPassword(auth, correo, password);
-      const usuario = credencialUsuario.user;
+    setRegistrando(true);
+    setError(''); 
 
+<<<<<<< HEAD
       // Si se verifica correctamente los datos
       alert(`El usuario ${usuario} a ingresado con exito!`);
 
@@ -34,8 +38,32 @@ const LoginPage = () => {
     } catch (e) {
       // Si no se pudo acceder
       setError('Error al intentar ingresar', e);
+=======
+    try{
+      const credencial = await signInWithEmailAndPassword(auth, correo, contraseña);
+      console.log('Usuario ingresado:', credencial.user);
+      route.push('/Home');
+      
     }
-    setError('');
+    catch (e) {
+      let mensajeError = 'No se pudo ingresar';
+      switch (e.code) {
+        case 'auth/invalid-email':
+          mensajeError = 'Correo electrónico inválido';
+          break;
+        case 'auth/user-not-found':
+          mensajeError = 'El usuario no existe';
+          break;
+        case 'auth/wrong-password':
+          mensajeError = 'Contraseña incorrecta';
+          break;
+        default:
+          mensajeError = e.message; // Mostrar mensaje de error genérico
+      }
+      setError(mensajeError);
+      setRegistrando(false);
+>>>>>>> 45fe214 (Ya jalo esta vaina)
+    }
   }
 
   return (
@@ -51,9 +79,9 @@ const LoginPage = () => {
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">Correo:</label>
             <input
               type="text"
-              id="username"
+              id="correo"
+              name="correo"
               value={correo}
-              name="username"
               className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               placeholder="Ingresa tu correo"
               onChange={(e) => setCorreo(e.target.value)}
@@ -65,22 +93,28 @@ const LoginPage = () => {
             <input
               type="password"
               id="password"
-              value={password}
               name="password"
+              value={contraseña}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md"
               placeholder="Ingresa tu contraseña"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setContraseña(e.target.value)}
             />
             <Link href={'/SignIn'} className='flex justify-end text-gray-500 hover:text-gray-600'>Registrarse</Link>
           </div>
           
+<<<<<<< HEAD
           {/* Mostrar un error si no se llenaron los campos */}
           {error && <p className='text-[#FF0000] mb-[2%]'>{error}</p>}
+=======
+          {/* Mostrar error si existe */}
+          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
+>>>>>>> 45fe214 (Ya jalo esta vaina)
 
           <button
-            type="submit" formMethod='POST'
+            type='submit'
+            disabled={registrando}
             className="w-full py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-          >Ingresar</button>
+          >{registrando ? "Ingresando..." : "Ingresar"}</button>
         </form>
       </div>
     </div>

@@ -1,23 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDUiyDC7V8kDSfiI3HYOAvpq54JWOMo1tM",
-  authDomain: "proyectowebdb-6bedd.firebaseapp.com",
-  projectId: "proyectowebdb-6bedd",
-  storageBucket: "proyectowebdb-6bedd.firebasestorage.app",
-  messagingSenderId: "749872551857",
-  appId: "1:749872551857:web:e1230da384b9c7a8274f90"
+  apiKey: "AIzaSyC97hSpgbbR2AxhTfNuZW7wieDK-YSbaaU",
+  authDomain: "crud-f9982.firebaseapp.com",
+  databaseURL: "https://crud-f9982-default-rtdb.firebaseio.com",
+  projectId: "crud-f9982",
+  storageBucket: "crud-f9982.firebasestorage.app",
+  messagingSenderId: "870765716043",
+  appId: "1:870765716043:web:bbdfb7cbd0899eef9aa3ce"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-export {auth, db};
+const appFirebase = initializeApp(firebaseConfig);
+export default appFirebase;

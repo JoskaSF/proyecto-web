@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { signOut } from 'firebase/auth';
-import { auth } from '@/firebase/firebaseConfig';
+import appFirebase from '@/firebase/firebaseConfig';
+import { getAuth } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+<<<<<<< HEAD
 import { FaHome, FaHistory,FaUser } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
+=======
+const auth = getAuth(appFirebase);
+>>>>>>> bd9c1fb18a99333bfd42e3c8c37e3f4b17a3889e
 
 const SideBar = () => {
     const router = useRouter();
@@ -12,8 +17,17 @@ const SideBar = () => {
     const handleLogOut = async () => {
         try {
             await signOut(auth);
+<<<<<<< HEAD
             console.log("Se cerró con éxito la sesión");
             router.push('/LogIn');
+=======
+            // Desplegar en consola
+            console.log("Se cerró con exito la sesión");
+            // redireccion al LogIn
+            if (cliente) {
+                router.replace('/LogIn'); 
+            }
+>>>>>>> 45fe214 (Ya jalo esta vaina)
         } catch (e) {
             console.error("Error: no se pudo cerrar sesión", e);
         }
