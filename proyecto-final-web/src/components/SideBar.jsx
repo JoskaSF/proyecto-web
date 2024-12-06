@@ -17,19 +17,15 @@ const SideBar = () => {
     const handleLogOut = async () => {
         try {
             await signOut(auth);
-<<<<<<< HEAD
-            console.log("Se cerró con éxito la sesión");
-            router.push('/LogIn');
-=======
+
             // Desplegar en consola
             console.log("Se cerró con exito la sesión");
             // redireccion al LogIn
             if (cliente) {
-                router.replace('/LogIn'); 
+                router.push('/LogIn'); 
             }
->>>>>>> 45fe214 (Ya jalo esta vaina)
         } catch (e) {
-            console.error("Error: no se pudo cerrar sesión", e);
+            console.log("Error: no se pudo cerrar sesión", e);
         }
     };
 

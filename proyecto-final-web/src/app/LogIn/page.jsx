@@ -27,18 +27,7 @@ const LoginPage = () => {
     setRegistrando(true);
     setError(''); 
 
-<<<<<<< HEAD
-      // Si se verifica correctamente los datos
-      alert(`El usuario ${usuario} a ingresado con exito!`);
 
-      // Limpiar los campos despues de ingresar
-      setCorreo('');
-      setPassword('');
-      setError('');
-    } catch (e) {
-      // Si no se pudo acceder
-      setError('Error al intentar ingresar', e);
-=======
     try{
       const credencial = await signInWithEmailAndPassword(auth, correo, contraseña);
       console.log('Usuario ingresado:', credencial.user);
@@ -62,7 +51,7 @@ const LoginPage = () => {
       }
       setError(mensajeError);
       setRegistrando(false);
->>>>>>> 45fe214 (Ya jalo esta vaina)
+
     }
   }
 
@@ -102,13 +91,10 @@ const LoginPage = () => {
             <Link href={'/SignIn'} className='flex justify-end text-gray-500 hover:text-gray-600'>Registrarse</Link>
           </div>
           
-<<<<<<< HEAD
+
           {/* Mostrar un error si no se llenaron los campos */}
           {error && <p className='text-[#FF0000] mb-[2%]'>{error}</p>}
-=======
-          {/* Mostrar error si existe */}
-          {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
->>>>>>> 45fe214 (Ya jalo esta vaina)
+
 
           <button
             type='submit'
