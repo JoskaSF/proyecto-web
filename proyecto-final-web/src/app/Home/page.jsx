@@ -3,18 +3,23 @@ import React, {useEffect, useState} from 'react'
 import RecipeCard from '@/components/RecipeCard'
 import SideBar from '@/components/SideBar'
 
+
 const HomePage = () => {
   const [meals, setMeals] =  useState([]); //Aqui se almacenan las meals, en un array
   const [loading, setLoading] =  useState(true); 
+  const [categoria, setCategoria] = useState("");
 
   useEffect(() => {
+    if (!categoria) return;
+
     const fetchMeals = async () => {
       try{
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=Beef`);
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${categoria}`);
         if (!response.ok){
           throw new Error('Error al obtener las recetas');
         }
         const info = await response.json();
+
         const mealsWithIngredients = info.meals.map((meal) => {
           // Extrae los ingredientes
           const ingredients = Object.keys(meal)
@@ -26,7 +31,7 @@ const HomePage = () => {
         setMeals(mealsWithIngredients);
       }
       catch (error) {
-        console.error(error);
+        alert("No hay recetas en esta categoría aun...")
       } finally {
         setLoading(false);
       }
@@ -34,13 +39,13 @@ const HomePage = () => {
 
     fetchMeals();
   
-  },[]);
+  },[categoria]);
   return (
     <div className='flex h-screen'>
-      <SideBar/>
+      <SideBar setCategoria={setCategoria}/>
       <main className="flex-1 bg-gray-100 p-6 overflow-y-auto">
         {loading ?(
-          <p>Cargando recetas...</p>
+          <p>Cargando recetas...</p> //JOSKA MODIFICA ESTE CARGANDO RECETAS
         ) : (
           meals.map((meal) => (
             <RecipeCard
