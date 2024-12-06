@@ -4,12 +4,9 @@ import { signOut } from 'firebase/auth';
 import appFirebase from '@/firebase/firebaseConfig';
 import { getAuth } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-<<<<<<< HEAD
 import { FaHome, FaHistory,FaUser } from "react-icons/fa";
 import { IoExit } from "react-icons/io5";
-=======
 const auth = getAuth(appFirebase);
->>>>>>> bd9c1fb18a99333bfd42e3c8c37e3f4b17a3889e
 
 const SideBar = () => {
     const router = useRouter();
