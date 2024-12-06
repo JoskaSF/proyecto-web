@@ -14,7 +14,7 @@ const MainPage = () => {
       <div className='min-w-[100vw] min-h-[88vh] overflow-clip relative flex items-center justify-center'>
         <img src="/images/bgMain.png" alt="Meal Background" className='absolute top-0 left-0 z-0 opacity-40 animacion_main_background object-fill'/>
         <div className='bg-white w-[70vw] h-[200%] absolute left-30 rotate-[20deg] shadow-2xl overflow-hidden'>
-          <img src="/images/meal3D.png" alt="Meal Banner" className='relative rotate-[-20deg] top-[25%] left-[53%] w-[45%]'/>
+          <img src="/images/meal3D.png" alt="Meal Banner" className='relative rotate-[-20deg] top-[25%] left-[53%] w-[45%] z-50'/>
           <h1 className='absolute bottom-[53%] left-[15%] text-[4.5rem] font-serif rotate-[-20deg]'>Recetitas</h1>
           <h2 className='absolute bottom-[44%] left-[9%] text-[1.5rem] rotate-[-20deg] font-mono font-bold'>Tu recetario inteligente:</h2>
           <h2 className='absolute bottom-[41%] left-[3%] text-[1.3rem] rotate-[-20deg] font-mono'>Organiza, encuentra y cocina con facilidad.</h2>

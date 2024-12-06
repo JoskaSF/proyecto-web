@@ -1,6 +1,7 @@
 'use client'
 import React, {useEffect, useState} from 'react'
 import RecipeCard from '@/components/RecipeCard'
+import SideBar from '@/components/SideBar'
 
 const HomePage = () => {
   const [meals, setMeals] =  useState([]); //Aqui se almacenan las meals, en un array
@@ -35,20 +36,23 @@ const HomePage = () => {
   
   },[]);
   return (
-    <div>
-    {loading ?(
-      <p>Cargando recetas...</p>
-    ) : (
-      meals.map((meal) => (
-        <RecipeCard
-            key={meal.idMeal}
-            name={meal.strMeal}
-            ingredients={meal.ingredients}// Pasa los ingredientes
-            image={meal.strMealThumb} 
-            instructions={meal.strInstructions}
-          />
-      ))
-    )}
+    <div className='flex h-screen'>
+      <SideBar/>
+      <main className="flex-1 bg-gray-100 p-6 overflow-y-auto">
+        {loading ?(
+          <p>Cargando recetas...</p>
+        ) : (
+          meals.map((meal) => (
+            <RecipeCard
+                key={meal.idMeal}
+                name={meal.strMeal}
+                ingredients={meal.ingredients}// Pasa los ingredientes
+                image={meal.strMealThumb}
+                instructions={meal.strInstructions}
+              />
+          ))
+        )}
+      </main>
     </div>
 
   );
