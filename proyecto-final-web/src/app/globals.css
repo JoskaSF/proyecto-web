@@ -6,8 +6,32 @@
     animation: animacion_background linear 15s infinite;
 }
 
+.carrusel {
+    animation: carruselAni linear 20s infinite;
+}
+
+.sign_cristal{
+    background: rgba(95, 74, 35, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 30px 0 0 30px;
+}
+
 @keyframes animacion_background {
     100% {
         transform: translateY(-43%);
+    }
+}
+
+@keyframes carruselAni {
+    33%{
+        transform: translateX(-100%);
+    }
+    66%{
+        transform: translateX(-200%);
+    }
+    100%{
+        transform: translateX(-300%);
     }
 }

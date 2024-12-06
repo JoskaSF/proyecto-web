@@ -1,5 +1,6 @@
 'use client'
 import React from 'react';
+import Link from 'next/link'
 import { useState } from 'react';
 import { auth } from '@/firebase/firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -24,7 +25,7 @@ const LoginPage = () => {
       const usuario = credencialUsuario.user;
 
       // Si se verifica correctamente los datos
-      console.log(`El usuario ${usuario} a ingresado con exito!`);
+      alert(`El usuario ${usuario} a ingresado con exito!`);
 
       // Limpiar los campos despues de ingresar
       setCorreo('');
@@ -59,7 +60,7 @@ const LoginPage = () => {
             />
           </div>
 
-          <div className="mb-6">
+          <div className={`${error ? "mb-3" :"mb-6"}`}>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña:</label>
             <input
               type="password"
@@ -70,10 +71,11 @@ const LoginPage = () => {
               placeholder="Ingresa tu contraseña"
               onChange={(e) => setPassword(e.target.value)}
             />
+            <Link href={'/SignIn'} className='flex justify-end text-gray-500 hover:text-gray-600'>Registrarse</Link>
           </div>
           
           {/* Mostrar un error si no se llenaron los campos */}
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p className='text-[#FF0000] mb-[2%]'>{error}</p>}
 
           <button
             type="submit" formMethod='POST'
