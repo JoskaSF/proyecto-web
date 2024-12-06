@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animacion_main_background {
+    animation: animacion_background linear 15s infinite;
+}
+
+@keyframes animacion_background {
+    100% {
+        transform: translateY(-43%);
+    }
+}
