@@ -1,48 +1,56 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { db } from '@/firebase/firebaseConfig';
-import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import appFirebase from '@/firebase/firebaseConfig';
+import { useRouter } from 'next/navigation';
+const auth = getAuth(appFirebase);
 import { MdFoodBank } from "react-icons/md";
 
 const SignIn = () => {
 
-    const [nombre, setNombre] = useState('');
+    const [registrando, setRegistrando] = useState(false);
     const [correo, setCorreo] = useState('');
-    const [password, setPassword] = useState('');
+    const [contraseña, setContraseña] = useState('');
     const [error, setError] = useState('');
+    const route = useRouter();
 
-    const enviar = async (e) => {
+    const functionAuthentication = async (e) => {
         e.preventDefault();
-        try{
 
-            const credenciales = {
-                nombre,
-                correo,
-                password
-            };
+        if (!correo || !contraseña) {
+            setError('Por favor ingresa ambos campos');
+            return;
+        }
+        setRegistrando(true);
+        setError('');
 
-            // Verificar que no se envie vacio
-            if(!nombre || !correo || !password){
-                setError('Todos los campos son obligatorios');
-                return;
-            }
-
-            const docRef = await addDoc(collection(db, 'Usuarios'), credenciales);
-            console.log("Se completo el registro del usuario con ID", docRef.id);
-
-            setNombre('');
-            setCorreo('');
-            setPassword('');
-            setError('');
+        try {
+            const credencial = await createUserWithEmailAndPassword(auth, correo, contraseña);
+            console.log('Usuario creado:', credencial.user);
+            route.push('/LogIn');
         }
         catch (e) {
-            console.log('Error al enviar los datos', e);
-            setError('Hubo un error al guardar los datos');
-        }
+            let mensajeError = 'No se pudo crear';
+            switch (e.code) {
+              case 'auth/invalid-email':
+                mensajeError = 'Correo electrónico inválido';
+                break;
+              case 'auth/user-not-found':
+                mensajeError = 'El usuario no existe';
+                break;
+              case 'auth/wrong-password':
+                mensajeError = 'Contraseña incorrecta';
+                break;
+              default:
+                mensajeError = e.message; // Mostrar mensaje de error genérico
+            }
+            setError(mensajeError);
+            setRegistrando(false);
+      
+          }
     }
-
 
     return (
         <div className='w-screen relative'>
@@ -52,16 +60,8 @@ const SignIn = () => {
             </div>
             <div className='absolute w-[40vw] max-h-screen min-h-screen right-0 p-5 sign_cristal rounded-l-[30px] flex flex-col overflow-hidden'>
                 <h1 className='text-white text-[3rem] font-mono flex justify-center items-center'>Sign In<MdFoodBank className='ml-4 text-[4rem]'/></h1>
-                <form className='' onSubmit={enviar}>
+                <form className='' onSubmit={functionAuthentication}>
                     <div className='flex flex-col'>
-                        {/* Entrada de nombre de usuario */}
-                        <label className='text-white ml-10 mb-2 text-[1.2rem] font-semibold'>Usuario:</label>
-                        <input
-                            type="text"
-                            placeholder='Ingresa tu usuario'
-                            value={nombre}
-                            onChange={(e)=>setNombre(e.target.value)}
-                            className='p-2 text-white bg-black bg-opacity-50 rounded-xl'/>
                         {/* Entrada de correo electronico */}
                         <label className='text-white ml-10 mb-2 mt-8 text-[1.2rem] font-semibold'>Correo:</label>
                         <input
@@ -75,8 +75,8 @@ const SignIn = () => {
                         <input
                             type="password"
                             placeholder='Ingresa tu contraseña'
-                            value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
+                            value={contraseña}
+                            onChange={(e)=>setContraseña(e.target.value)}
                             className='p-2 text-white bg-black bg-opacity-50 rounded-xl'/>
                         {/* Boton de confirmar */}
                     </div>

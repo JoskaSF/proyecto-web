@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
-import { getFirestore, doc, collection, addDoc } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth"; // Importa getAuth desde Firebase
 import appFirebase from '@/firebase/firebaseConfig';
 
-const RecipeCard = ({ name, ingredients, image, instructions, usuarioID }) => {
+const RecipeCard = ({ name, ingredients, image, instructions }) => {
     const [showInstructions, setShowInstructions] = useState(false);
+    const [usuarioID, setUsuarioID] = useState(null); // Estado para almacenar el usuarioID
 
     const toggleInstructions = () => {
         setShowInstructions(!showInstructions); // Alterna el estado de visibilidad
     };
 
+    // Obtén el usuarioID cuando el componente se monte
+    useEffect(() => {
+        const auth = getAuth();
+        if (auth.currentUser) {
+            setUsuarioID(auth.currentUser.uid); // Establece el usuarioID si el usuario está autenticado
+        } else {
+            console.log('No hay usuario autenticado');
+        }
+    }, []); // El array vacío [] asegura que solo se ejecute una vez al montar el componente
+
     const handleHecha = async () => {
+        if (!usuarioID) {
+            alert('No estás autenticado. Por favor, inicia sesión.');
+            return;
+        }
+
         try {
             const db = getFirestore(appFirebase); // Obtén la instancia de Firestore
             const historialRef = collection(db, `Usuarios/${usuarioID}/historial`);
