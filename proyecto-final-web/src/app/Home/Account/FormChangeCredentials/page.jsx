@@ -71,80 +71,81 @@ const FormChangeCredentials = () => {
     };
 
   return (
-    <div>
-      <h2>Actualizar Datos de la Cuenta</h2>
-      <form onSubmit={handleChangeEmail}>
-        <div>
-            <label>Contraseña actual</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className=""
-              placeholder="Ingresa tu contraseña actual"
-            />
-        </div>
-        <div>
-            <label htmlFor="">Nuevo email:</label>
-            <input
-              type="email"
-              id="newEmail"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              className=""
-              placeholder="Ingresa tu nuevo correo electrónico"
-            />
-        </div>
-
-        <div>
-            <button
+    <div className='w-screen h-screen flex justify-center items-center'>
+      <div className='p-10 rounded-2xl shadow-2xl'>
+        <h2 className='text-[1.5rem] font-semibold mb-5'>Actualizar Datos de la Cuenta</h2>
+        <form onSubmit={handleChangeEmail} className='space-y-5'>
+          <div className='flex flex-col'>
+              <label>Contraseña actual</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border-2 p-1 rounded-xl border-[#276d2b]"
+                placeholder="Ingresa tu contraseña actual"
+              />
+          </div>
+          <div className='flex flex-col'>
+              <label htmlFor="">Nuevo email:</label>
+              <input
+                type="email"
+                id="newEmail"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+                className="border-2 p-1 rounded-xl border-[#276d2b]"
+                placeholder="Ingresa tu nuevo correo electrónico"
+              />
+          </div>
+          <div className='flex flex-col'>
+              <button
+                  type="submit"
+                  className="w-full py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                  disabled={loading}
+                  >
+                  {loading ? 'Actualizando...' : 'Cambiar Correo'}
+              </button>
+          </div>
+        </form>
+      
+        <form onSubmit={handleChangePassword}>
+          <div className="my-4 flex flex-col  ">
+              <label htmlFor="password" >Contraseña actual:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border-2 p-1 rounded-xl border-[#276d2b]"
+                placeholder="Ingresa tu contraseña actual"
+              />
+          </div>
+          <div className="mb-4">
+              <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">Nueva contraseña:</label>
+              <input
+                type="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="border-2 p-1 rounded-xl border-[#276d2b] w-full"
+                placeholder="Ingresa tu nueva contraseña"
+              />
+          </div>
+          <div className="mb-4">
+              <button
                 type="submit"
                 className="w-full py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
                 disabled={loading}
-                >
-                {loading ? 'Actualizando...' : 'Cambiar Correo'}
-            </button>
-        </div>
-      </form>
-        
-      <form onSubmit={handleChangePassword}>
-        <div className="mb-4">
-            <label htmlFor="password" >Contraseña actual:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className=""
-              placeholder="Ingresa tu contraseña actual"
-            />
-        </div>
-        <div className="mb-4">
-            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">Nueva contraseña:</label>
-            <input
-              type="password"
-              id="newPassword"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-              placeholder="Ingresa tu nueva contraseña"
-            />
-        </div>
-        <div className="mb-4">
-            <button
-              type="submit"
-              className="w-full py-2 bg-green-500 text-white font-bold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-              disabled={loading}
-            >
-              {loading ? 'Actualizando...' : 'Cambiar Contraseña'}
-            </button>
-        </div>
-        <div className="mb-4">
-            <Link href={"/Home/Account"}>Volver</Link>
-        </div>
-      </form>
-      {error && <p className="text-red-500 text-center">{error}</p>}
+              >
+                {loading ? 'Actualizando...' : 'Cambiar Contraseña'}
+              </button>
+          </div>
+          <div className="mb-4">
+              <Link href={"/Home/Account"} className='p-2 rounded-xl bg-green-700 text-white'>Volver</Link>
+          </div>
+        </form>
+        {error && <p className="text-red-500 text-center">{error}</p>}
+      </div>
     </div>
   );
 }
